@@ -71,12 +71,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Text("nb_like"+"j'aime"),Text("user_id"+"description"),Text("il y a"+"date_post"),], 
                 )],
-                
               )],
           )],
         ),
         )
-        
     );
   }
 }
