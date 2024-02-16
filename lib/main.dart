@@ -47,12 +47,34 @@ class _MyHomePageState extends State<MyHomePage> {
 
           ),
           //ListView publication, partie de david
-          Expanded(child: ListView(
-              
-          ))],
+          ListView(
+          
+              //colonne qui correspond a une unique publication
+              children: [Column(
+          
+                //ligne qui comporte la photo de profil et le nom d'utilisateur au dessus de la publication
+                children: [Row(
+                  //photo de profil
+                    children: [Image.asset(""),
+                    //nom d'utilisateur
+                    Text("")], 
+                ),
+                Text(""), //carrousel a faire
+                //bas de publication
+                Column(
+                  //like, commentaire, partager
+                  children: [Row(
+                    children: [
+                    Image.asset(""),
+                    Image.asset(""),
+                    Image.asset("")],
+                  ),
+                  Text("nb_like"+"j'aime"),Text("user_id"+"description"),Text("il y a"+"date_post"),], 
+                )],
+              )],
+          )],
         ),
         )
-        
     );
   }
 }
