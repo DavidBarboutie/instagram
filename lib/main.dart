@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 void main() {
   runApp(const MyApp());
@@ -47,4 +48,31 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ));
   }
+}
+
+class Story {
+  int userID;
+  String name;
+  String img;
+
+  Story({required this.userID, required this.name, required this.img});
+
+  factory Story.fromJson(Map<String, dynamic> json) {
+    return Story(
+      userID: json['userId'],
+      name: json['name'],
+      img: json['img'],
+    );
+  }
+}
+
+Future<Story> loadPersonFromJson() async {
+  // Charger le contenu du fichier JSON
+  final String response = await rootBundle.loadString('assets/person.json');
+
+  // Convertir la chaîne JSON en un objet Map
+  final data = jsonDecode(response);
+
+  // Créer une instance de Person à partir du JSON
+  return Story.fromJson(data);
 }
