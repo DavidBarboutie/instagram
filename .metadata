@@ -19,7 +19,10 @@ migration:
       create_revision: 2e9cb0aa71a386a91f73f7088d115c0d96654829
       base_revision: 2e9cb0aa71a386a91f73f7088d115c0d96654829
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> main
     - platform: ios
       create_revision: 2e9cb0aa71a386a91f73f7088d115c0d96654829
       base_revision: 2e9cb0aa71a386a91f73f7088d115c0d96654829
@@ -35,6 +38,9 @@ migration:
     - platform: windows
       create_revision: 2e9cb0aa71a386a91f73f7088d115c0d96654829
       base_revision: 2e9cb0aa71a386a91f73f7088d115c0d96654829
+<<<<<<< HEAD
+>>>>>>> main
+=======
 >>>>>>> main
 
   # User provided section
