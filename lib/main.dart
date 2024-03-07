@@ -1,3 +1,6 @@
+// ignore_for_file: non_constant_identifier_names, prefer_adjacent_string_concatenation, prefer_const_constructors, prefer_const_literals_to_create_immutables
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
@@ -58,16 +61,18 @@ class _MyHomePageState extends State<MyHomePage> {
             height: 603,
             color: Colors.black,
             child: ListView(
-            
+                
                 //colonne qui correspond a une unique publication
-                children: [Column(
+                children: [
+                  for (var i = 1; i<=7; i++) 
+                  Column(
             
                   //ligne qui comporte la photo de profil et le nom d'utilisateur au dessus de la publication
                   children: [Row(
                     //photo de profil
-                      children: [Text("photo de profil"),
+                      children: [Text("photo de PROFIL" + i.toString(), style:TextStyle(color:Colors.white,)),
                       //nom d'utilisateur
-                      Text("username")], 
+                      Text(" username", style:TextStyle(color:Colors.white,))], 
                   ),
                   Text(""), //carrousel a faire
                   //bas de publication
@@ -75,12 +80,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     //like, commentaire, partager
                     children: [Row(
                       children: [
-                      Text("LIKE"),Text("COMMENT"),Text("SHARE")],
+                      Text("LIKE ",style:TextStyle(color:Colors.white,)),Text("COMMENT ",style:TextStyle(color:Colors.white,)),Text("SHARE",style:TextStyle(color:Colors.white,))],
                     ),
-                    Text("nb_like"+"j'aime"),Text("user_id"+"description"),Text("il y a"+"date_post"),], 
+                    Text("nb_like"+"j'aime", style:TextStyle(color:Colors.white,)),Text("user_id"+"description", style:TextStyle(color:Colors.white,)),Text("il y a"+"date_post", style:TextStyle(color:Colors.white,)),], 
                   )],
-                )],
+                ),
+                ],
             ),
+            
           )],
         ),
         )
