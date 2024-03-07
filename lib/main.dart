@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 
 void main() {
@@ -41,7 +42,14 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             //ListView storie, partie de JC
             children: [
-              ListView(),
+              FutureBuilder(
+                  future: loadStoryFromJson(),
+                  builder: (context, data) {
+                    if (data.hasData) {
+                      return Text(data.data!.name);
+                    }
+                    return CircularProgressIndicator();
+                  }),
               //ListView publication, partie de david
               Expanded(child: ListView())
             ],
@@ -66,9 +74,9 @@ class Story {
   }
 }
 
-Future<Story> loadPersonFromJson() async {
+Future<Story> loadStoryFromJson() async {
   // Charger le contenu du fichier JSON
-  final String response = await rootBundle.loadString('assets/person.json');
+  final String response = await rootBundle.loadString('assets/data.json');
 
   // Convertir la chaîne JSON en un objet Map
   final data = jsonDecode(response);
