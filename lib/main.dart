@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
-
+import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -68,13 +68,38 @@ class _MyHomePageState extends State<MyHomePage> {
                   Column(
             
                   //ligne qui comporte la photo de profil et le nom d'utilisateur au dessus de la publication
-                  children: [Row(
+                  children: [SizedBox(
+                    height: 50,
+                    child: Row(
+                    
                     //photo de profil
                       children: [Text("photo de PROFIL" + i.toString(), style:TextStyle(color:Colors.white,)),
                       //nom d'utilisateur
                       Text(" username", style:TextStyle(color:Colors.white,))], 
+                  ),),
+                  //carrousel d'image formant un post a plusierus publication
+                  FlutterCarousel(
+                    options: CarouselOptions(
+                      height: 400.0, 
+                      showIndicator: true,
+                      slideIndicator: CircularSlideIndicator(),
+                      viewportFraction: 1.0,
+                    ),
+                    items: ["asset/data.json",2,3,4,5].map((i) {
+                      return Builder(
+                        builder: (BuildContext context) {
+                          return Container(
+                            width: MediaQuery.of(context).size.width,
+                            margin: EdgeInsets.symmetric(horizontal: 5.0),
+                            decoration: BoxDecoration(
+                              color: Colors.amber
+                            ),
+                          );
+                        },
+                      );
+                    }).toList(),
                   ),
-                  Text(""), //carrousel a faire
+                  
                   //bas de publication
                   Column(
                     //like, commentaire, partager
@@ -95,6 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
+//tests temporaires 
 class Person {
   int userId;
   List<String> image;
