@@ -173,7 +173,8 @@ Future<List<Story>> loadStoryFromJson() async {
 
   // Convertir la chaîne JSON en un objet Map
   final data = jsonDecode(response);
-  // Créer une instance de Person à partir du JSON
+
+  // Créer une instance de Story à partir du JSON
   for (int i = 0; i < (data['story'] as List<dynamic>).length; i++) {
     listOfStory.add(Story.fromJson(data['story'][i]));
   }
