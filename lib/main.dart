@@ -26,21 +26,36 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
   final String title;
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
-
 class _MyHomePageState extends State<MyHomePage> {
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          //appbar partie de noe
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        appBar: AppBar( 
+          // title: const Text('Pour vous'),
+          title: const Text('Pour vous', 
+          style: TextStyle(color: Colors.white)),
+          backgroundColor: Colors.black,
+          actions: <Widget>[
+            // Bouton Coeur
+            IconButton(
+              icon: const Icon(Icons.heart_broken,
+              color: Colors.white),
+              onPressed: () {},
+            ),
+            // Bouton envoyer
+            IconButton(
+              icon: const Icon(Icons.send,
+              color: Colors.white),
+              onPressed: () {},
+            ),
+          ]
         ),
         body: Center(
           child: Column(
