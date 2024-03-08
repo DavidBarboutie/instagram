@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   future: loadStoryFromJson(),
                   builder: (context, data) {
                     if (data.hasData) {
-                      return Text(data.data!.name);
+                      return Text(data.data!.first.name);
                     }
                     return CircularProgressIndicator();
                   }),
@@ -66,6 +66,7 @@ class Story {
   Story({required this.userID, required this.name, required this.img});
 
   factory Story.fromJson(Map<String, dynamic> json) {
+    print(json);
     return Story(
       userID: json['userId'],
       name: json['name'],
@@ -74,13 +75,16 @@ class Story {
   }
 }
 
-Future<Story> loadStoryFromJson() async {
+Future<List<Story>> loadStoryFromJson() async {
+  List<Story> listOfStory = [];
   // Charger le contenu du fichier JSON
   final String response = await rootBundle.loadString('assets/data.json');
 
   // Convertir la chaîne JSON en un objet Map
   final data = jsonDecode(response);
-
   // Créer une instance de Person à partir du JSON
-  return Story.fromJson(data);
+  for (int i = 0; i < (data['story'] as List<dynamic>).length; i++) {
+    listOfStory.add(Story.fromJson(data['story'][i]));
+  }
+  return listOfStory;
 }
