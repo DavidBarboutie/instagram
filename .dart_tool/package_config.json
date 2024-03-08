@@ -51,7 +51,7 @@
     },
     {
       "name": "flutter_carousel_widget",
-      "rootUri": "file:///C:/Users/d.barboutie/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_carousel_widget-2.2.0",
+      "rootUri": "file:///C:/Users/j.lafargue/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_carousel_widget-2.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -158,7 +158,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-03-08T07:28:49.585595Z",
+  "generated": "2024-03-08T10:23:23.015268Z",
   "generator": "pub",
   "generatorVersion": "3.2.3"
 }
