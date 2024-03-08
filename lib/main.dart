@@ -66,7 +66,6 @@ class Story {
   Story({required this.userID, required this.name, required this.img});
 
   factory Story.fromJson(Map<String, dynamic> json) {
-    print(json);
     return Story(
       userID: json['userId'],
       name: json['name'],
