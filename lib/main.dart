@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-//utilisation pour le mneu 
-enum SampleItem { itemOne, itemTwo, itemThree }
-
 void main() {
   runApp(const MyApp());
 }
@@ -29,13 +26,7 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 class _MyHomePageState extends State<MyHomePage> {
-  String selectedOption = 'None';
-
-void selectOption(String option) {
-    setState(() {
-      selectedOption = option;
-    });
-  }
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,18 +36,17 @@ void selectOption(String option) {
           style: TextStyle(color: Colors.white)),
           backgroundColor: Colors.black,
           actions: <Widget>[
+            // Bouton Coeur
             IconButton(
               icon: const Icon(Icons.heart_broken,
               color: Colors.white),
               onPressed: () {},
             ),
+            // Bouton envoyer
             IconButton(
               icon: const Icon(Icons.send,
               color: Colors.white),
-              onPressed: () {
-                ScaffoldMessenger.of(context)
-                    .showSnackBar(const SnackBar(content: Text('Next Page')));
-              },
+              onPressed: () {},
             ),
           ]
         ),
