@@ -22,8 +22,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
   final String title;
@@ -37,38 +35,30 @@ void selectOption(String option) {
     setState(() {
       selectedOption = option;
     });
-
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar( 
-          title: const Text('Pour vous'),
-          backgroundColor: Colors.white,
+          // title: const Text('Pour vous'),
+          title: const Text('Pour vous', 
+          style: TextStyle(color: Colors.white)),
+          backgroundColor: Colors.black,
           actions: <Widget>[
-            PopupMenuButton<String>(
-            onSelected: selectOption,
-            itemBuilder: (BuildContext context) {
-              return {'Option 1', 'Option 2'}.map((String choice) {
-                return PopupMenuItem<String>(
-                  value: choice,
-                  child: Text(choice),
-                );
-              }).toList();
-            },
-          ),
             IconButton(
-              icon: const Icon(Icons.heart_broken),
+              icon: const Icon(Icons.heart_broken,
+              color: Colors.white),
               onPressed: () {},
             ),
             IconButton(
-              icon: const Icon(Icons.send),
+              icon: const Icon(Icons.send,
+              color: Colors.white),
               onPressed: () {
                 ScaffoldMessenger.of(context)
                     .showSnackBar(const SnackBar(content: Text('Next Page')));
               },
             ),
-          ],
+          ]
         ),
         body: Center(
           child: Column(
