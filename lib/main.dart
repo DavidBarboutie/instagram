@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       slideIndicator: CircularSlideIndicator(),
                       viewportFraction: 1.0,
                     ),
-                    items: ["asset/data.json",2,3,4,5].map((i) {
+                    items: ["asset/data.json/",2,3,4,5].map((i) {
                       return Builder(
                         builder: (BuildContext context) {
                           return Container(
@@ -120,20 +120,21 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-//tests temporaires 
-class Person {
-  int userId;
-  List<String> image;
-  int nb_like;
+//deserialization json post
+
+class Post {
+  int userID;
+  List<String> img;
+  String nb_like;
   String description;
   String date_post;
 
-  Person({required this.userId, required this.image, required this.nb_like, required this.description, required this.date_post});
+  Post({required this.userID, required this.img, required this.nb_like, required this.description, required this.date_post});
 
-  factory Person.fromJson(Map<String, dynamic> json) {
-    return Person(
-      userId: json['userId'],
-      image: json['images'],
+  factory Post.fromJson(Map<String, dynamic> json) {
+    return Post(
+      userID: json['userId'],
+      img: json['image'],
       nb_like: json['nb_like'],
       description: json['description'],
       date_post: json['date_post']
@@ -141,13 +142,21 @@ class Person {
   }
 }
 
-Future<Person> loadPersonFromJson() async {
+Future<List<Post>> loadPostFromJson() async {
+  List<Post> listOfPost = [];
   // Charger le contenu du fichier JSON
   final String response = await rootBundle.loadString('assets/data.json');
-  
+
   // Convertir la chaîne JSON en un objet Map
   final data = jsonDecode(response);
-
   // Créer une instance de Person à partir du JSON
-  return Person.fromJson(data);
+
+  for (int i = 0; i < (data['post'] as List<dynamic>).length; i++) {
+    if (i == 1){
+      for (int j = 0; j< (data["post"][1] as List<dynamic>).length; j++){
+      listOfPost.add(Post.fromJson(data['post'][1][j]));
+    }}
+    listOfPost.add(Post.fromJson(data['post'][i]));
+  }
+  return listOfPost;
 }
