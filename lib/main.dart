@@ -45,18 +45,23 @@ class _MyHomePageState extends State<MyHomePage> {
           actions: <Widget>[
             // Bouton Coeur
             IconButton(
-              icon: const Icon(Icons.heart_broken,
+              icon: const Icon(Icons.favorite,
               color: Colors.white),
               onPressed: () {},
             ),
             // Bouton envoyer
+
             IconButton(
               icon: const Icon(Icons.send,
               color: Colors.white),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: context) => const _story_view.dart()),
+              },
             ),
           ]
-        ),
+        ), 
         body: Center(
           child: Column(
             //ListView storie, partie de JC
