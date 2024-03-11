@@ -1,6 +1,5 @@
 // ignore_for_file: non_constant_identifier_names, prefer_adjacent_string_concatenation, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
@@ -39,21 +38,55 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          //appbar partie de noe
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        ),
+            // title: const Text('Pour vous'),
+            title:
+                const Text('Pour vous', style: TextStyle(color: Colors.white)),
+            backgroundColor: Colors.black,
+            actions: <Widget>[
+              // Bouton Coeur
+              IconButton(
+                icon: const Icon(Icons.heart_broken, color: Colors.white),
+                onPressed: () {},
+              ),
+              // Bouton envoyer
+              IconButton(
+                icon: const Icon(Icons.send, color: Colors.white),
+                onPressed: () {},
+              ),
+            ]),
         body: Center(
           child: Column(
             //ListView storie, partie de JC
             children: [
-              FutureBuilder(
-                  future: loadStoryFromJson(),
-                  builder: (context, data) {
-                    if (data.hasData) {
-                      return Text(data.data!.first.name);
-                    }
-                    return CircularProgressIndicator();
-                  }),
+              SizedBox(
+                height: 100,
+                child: FutureBuilder(
+                    future: loadStoryFromJson(),
+                    builder: (context, data) {
+                      if (data.hasData) {
+                        return ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: data.data!.length,
+                          itemBuilder: (context, i) {
+                            return Column(
+                              children: [
+                                // Ajouter propriété container indice : decoration
+                                Container(
+                                  height: 70,
+                                  width: 70,
+                                  child: Image(
+                                    image: NetworkImage(data.data![i].img),
+                                  ),
+                                ),
+                                Text(data.data![i].name)
+                              ],
+                            );
+                          },
+                        );
+                      }
+                      return CircularProgressIndicator();
+                    }),
+              ),
               //ListView publication, partie de david
               Container(
                 height: 603,
@@ -173,7 +206,8 @@ Future<List<Story>> loadStoryFromJson() async {
 
   // Convertir la chaîne JSON en un objet Map
   final data = jsonDecode(response);
-  // Créer une instance de Person à partir du JSON
+
+  // Créer une instance de Story à partir du JSON
   for (int i = 0; i < (data['story'] as List<dynamic>).length; i++) {
     listOfStory.add(Story.fromJson(data['story'][i]));
   }
