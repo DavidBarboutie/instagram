@@ -1,6 +1,5 @@
 // ignore_for_file: non_constant_identifier_names, prefer_adjacent_string_concatenation, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
@@ -54,11 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
             IconButton(
               icon: const Icon(Icons.send,
               color: Colors.white),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: context) => const _story_view.dart()),
-              },
+              onPressed: () {},
             ),
           ]
         ), 
