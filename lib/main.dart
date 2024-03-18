@@ -37,7 +37,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
         appBar: AppBar( 
           // title: const Text('Pour vous'),
           title: const Text('Pour vous', 
@@ -59,25 +58,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ]
         ), 
-=======
-        appBar: AppBar(
-            // title: const Text('Pour vous'),
-            title:
-                const Text('Pour vous', style: TextStyle(color: Colors.white)),
-            backgroundColor: Colors.black,
-            actions: <Widget>[
-              // Bouton Coeur
-              IconButton(
-                icon: const Icon(Icons.heart_broken, color: Colors.white),
-                onPressed: () {},
-              ),
-              // Bouton envoyer
-              IconButton(
-                icon: const Icon(Icons.send, color: Colors.white),
-                onPressed: () {},
-              ),
-            ]),
->>>>>>> main
         body: Center(
           child: Column(
             //ListView storie, partie de JC
@@ -94,15 +74,23 @@ class _MyHomePageState extends State<MyHomePage> {
                           itemBuilder: (context, i) {
                             return Column(
                               children: [
-                                // Ajouter propriété container indice : decoration
+
                                 Container(
-                                  height: 70,
-                                  width: 70,
-                                  child: Image(
-                                    image: NetworkImage(data.data![i].img),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(Radius.circular(70.0)),
+                                    image: DecorationImage(
+                                      image: NetworkImage(data.data![i].img),
+                                      ),
+                                    color: Colors.yellow,
                                   ),
-                                ),
-                                Text(data.data![i].name)
+                                  margin: EdgeInsets.only(left: 10),
+                                  height: 80,
+                                  width: 80,
+                                  ),
+                                Text(data.data![i].name,
+                                style: TextStyle(
+                                  color: Colors.red,
+                                ),)
                               ],
                             );
                           },
@@ -139,7 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               ],
                             ),
                           ),
-                          //carrousel d'image formant un post a plusierus publication
+                          //carrousel d'image formant un post a plusieurs publication
                           FlutterCarousel(
                             options: CarouselOptions(
                               height: 400.0,
