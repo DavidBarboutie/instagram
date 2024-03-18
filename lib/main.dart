@@ -25,17 +25,19 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
   final String title;
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
+
 class _MyHomePageState extends State<MyHomePage> {
- 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+<<<<<<< HEAD
         appBar: AppBar( 
           // title: const Text('Pour vous'),
           title: const Text('Pour vous', 
@@ -57,18 +59,58 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ]
         ), 
+=======
+        appBar: AppBar(
+            // title: const Text('Pour vous'),
+            title:
+                const Text('Pour vous', style: TextStyle(color: Colors.white)),
+            backgroundColor: Colors.black,
+            actions: <Widget>[
+              // Bouton Coeur
+              IconButton(
+                icon: const Icon(Icons.heart_broken, color: Colors.white),
+                onPressed: () {},
+              ),
+              // Bouton envoyer
+              IconButton(
+                icon: const Icon(Icons.send, color: Colors.white),
+                onPressed: () {},
+              ),
+            ]),
+>>>>>>> main
         body: Center(
           child: Column(
             //ListView storie, partie de JC
             children: [
-              FutureBuilder(
-                  future: loadStoryFromJson(),
-                  builder: (context, data) {
-                    if (data.hasData) {
-                      return Text(data.data!.first.name);
-                    }
-                    return CircularProgressIndicator();
-                  }),
+              SizedBox(
+                height: 100,
+                child: FutureBuilder(
+                    future: loadStoryFromJson(),
+                    builder: (context, data) {
+                      if (data.hasData) {
+                        return ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: data.data!.length,
+                          itemBuilder: (context, i) {
+                            return Column(
+                              children: [
+                                // Ajouter propriété container indice : decoration
+                                Container(
+                                  height: 70,
+                                  width: 70,
+                                  child: Image(
+                                    image: NetworkImage(data.data![i].img),
+                                  ),
+                                ),
+                                Text(data.data![i].name)
+                              ],
+                            );
+                          },
+                        );
+                      }
+                      return CircularProgressIndicator();
+                    }),
+              ),
               //ListView publication, partie de david
               Container(
                 height: 603,
