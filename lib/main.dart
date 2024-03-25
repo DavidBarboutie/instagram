@@ -38,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            // title: const Text('Pour vous'),
+            // Titre
             title:
                 const Text('Pour vous', style: TextStyle(color: Colors.white)),
             backgroundColor: Colors.black,
@@ -91,11 +91,15 @@ class _MyHomePageState extends State<MyHomePage> {
               Container(
                 height: 603,
                 color: Colors.black,
-                child: ListView(
-                  //colonne qui correspond a une unique publication
-                  children: [
-                    for (var i = 1; i <= 7; i++)
-                      Column(
+                child: FutureBuilder(
+                  future: loadPostFromJson(),
+                  builder: (context, data) {
+                    if (data.hasData){
+                      return ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        itemCount: data.data!.length,
+                        itemBuilder: (context, i) {
+                          Column(
                         //ligne qui comporte la photo de profil et le nom d'utilisateur au dessus de la publication
                         children: [
                           SizedBox(
@@ -103,10 +107,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             child: Row(
                               //photo de profil
                               children: [
-                                Text("photo de PROFIL" + i.toString(),
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    )),
+                                // Image de profil, ce n'est pas la bonne le lien n'est pas fait
+                                Image(image: NetworkImage(data.data![i].img[i]) ),
                                 //nom d'utilisateur
                                 Text(" username",
                                     style: TextStyle(
@@ -115,7 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               ],
                             ),
                           ),
-                          //carrousel d'image formant un post a plusierus publication
+                          //carrousel d'image formant un post a plusieurs publications
                           FlutterCarousel(
                             options: CarouselOptions(
                               height: 400.0,
@@ -123,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               slideIndicator: CircularSlideIndicator(),
                               viewportFraction: 1.0,
                             ),
-                            items: ["asset/data.json/", 2, 3, 4, 5].map((i) {
+                            items: [data.data![i].img].map((i) {
                               return Builder(
                                 builder: (BuildContext context) {
                                   return Container(
@@ -144,37 +146,48 @@ class _MyHomePageState extends State<MyHomePage> {
                             children: [
                               Row(
                                 children: [
-                                  Text("LIKE ",
+                                  // Bouton like
+                                  Text(" LIKE ",
                                       style: TextStyle(
                                         color: Colors.white,
                                       )),
-                                  Text("COMMENT ",
+                                  // Bouton Commentaire
+                                  Text(" COMMENT ",
                                       style: TextStyle(
                                         color: Colors.white,
                                       )),
+                                  // Bouton partager
                                   Text("SHARE",
                                       style: TextStyle(
                                         color: Colors.white,
                                       ))
                                 ],
                               ),
-                              Text("nb_like" + "j'aime",
+                              // Nombre de j'aime
+                              Text(data.data![i].nb_like + "j'aime",
                                   style: TextStyle(
                                     color: Colors.white,
                                   )),
-                              Text("user_id" + "description",
+                              // Nom utilisateur non fait + description
+                              Text("user_id" + data.data![i].description,
                                   style: TextStyle(
                                     color: Colors.white,
                                   )),
-                              Text("il y a" + "date_post",
+                              // Date du post
+                              Text("il y a" + data.data![i].date_post,
                                   style: TextStyle(
                                     color: Colors.white,
                                   )),
                             ],
                           )
                         ],
-                      ),
-                  ],
+                      );
+
+                        });
+                    }
+                    // Chargement si aucune donnée
+                     return CircularProgressIndicator();
+                  } 
                 ),
               )
             ],
@@ -182,7 +195,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ));
   }
 }
-
+// Class pour les story désérialisé
 class Story {
   int userID;
   String name;
@@ -199,6 +212,7 @@ class Story {
   }
 }
 
+// Désérialisation Story
 Future<List<Story>> loadStoryFromJson() async {
   List<Story> listOfStory = [];
   // Charger le contenu du fichier JSON
@@ -214,7 +228,7 @@ Future<List<Story>> loadStoryFromJson() async {
   return listOfStory;
 }
 
-//deserialization json post
+//Class pour post désérialisé
 
 class Post {
   int userID;
@@ -240,6 +254,7 @@ class Post {
   }
 }
 
+// Désérialisation Post
 Future<List<Post>> loadPostFromJson() async {
   List<Post> listOfPost = [];
   // Charger le contenu du fichier JSON
@@ -250,11 +265,6 @@ Future<List<Post>> loadPostFromJson() async {
   // Créer une instance de Person à partir du JSON
 
   for (int i = 0; i < (data['post'] as List<dynamic>).length; i++) {
-    if (i == 1) {
-      for (int j = 0; j < (data["post"][1] as List<dynamic>).length; j++) {
-        listOfPost.add(Post.fromJson(data['post'][1][j]));
-      }
-    }
     listOfPost.add(Post.fromJson(data['post'][i]));
   }
   return listOfPost;
