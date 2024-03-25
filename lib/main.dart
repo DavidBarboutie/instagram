@@ -37,27 +37,24 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar( 
-          // title: const Text('Pour vous'),
-          title: const Text('Pour vous', 
-          style: TextStyle(color: Colors.white)),
-          backgroundColor: Colors.black,
-          actions: <Widget>[
-            // Bouton Coeur
-            IconButton(
-              icon: const Icon(Icons.favorite,
-              color: Colors.white),
-              onPressed: () {},
-            ),
-            // Bouton envoyer
+        appBar: AppBar(
+            // title: const Text('Pour vous'),
+            title:
+                const Text('Pour vous', style: TextStyle(color: Colors.white)),
+            backgroundColor: Colors.black,
+            actions: <Widget>[
+              // Bouton Coeur
+              IconButton(
+                icon: const Icon(Icons.favorite, color: Colors.white),
+                onPressed: () {},
+              ),
+              // Bouton envoyer
 
-            IconButton(
-              icon: const Icon(Icons.send,
-              color: Colors.white),
-              onPressed: () {},
-            ),
-          ]
-        ), 
+              IconButton(
+                icon: const Icon(Icons.send, color: Colors.white),
+                onPressed: () {},
+              ),
+            ]),
         body: Center(
           child: Column(
             //ListView storie, partie de JC
@@ -74,23 +71,29 @@ class _MyHomePageState extends State<MyHomePage> {
                           itemBuilder: (context, i) {
                             return Column(
                               children: [
-
                                 Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.all(Radius.circular(70.0)),
-                                    image: DecorationImage(
-                                      image: NetworkImage(data.data![i].img),
+                                  color: Colors.black,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(70.0)),
+                                      image: DecorationImage(
+                                        image: NetworkImage(data.data![i].img),
+                                        //alignment: Alignment.center,
                                       ),
-                                    color: Colors.yellow,
+                                      color: Colors.red,
+                                    ),
+                                    margin: EdgeInsets.only(left: 10),
+                                    height: 80,
+                                    width: 80,
                                   ),
-                                  margin: EdgeInsets.only(left: 10),
-                                  height: 80,
-                                  width: 80,
+                                ),
+                                Text(
+                                  data.data![i].name,
+                                  style: TextStyle(
+                                    color: Colors.red,
                                   ),
-                                Text(data.data![i].name,
-                                style: TextStyle(
-                                  color: Colors.red,
-                                ),)
+                                )
                               ],
                             );
                           },
